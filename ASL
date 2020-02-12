@@ -1,0 +1,37 @@
+import urllib.request
+import random
+from PIL import Image
+import os
+import cv2
+
+os.chdir('C:/Users/djs72/box/ASL')
+
+word_url = "http://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain"
+response = urllib.request.urlopen(word_url)
+long_txt = response.read().decode()
+words = long_txt.splitlines()
+
+num= random.randint(0,25487)
+asl_word = (words[num])
+#comment this print out, just to make sure it works here
+#print(asl_word)        #checkpoint
+
+#Take asl_word and break it into individual letters by making split function
+def split(word):
+    return[char for char in word]
+#print(split(asl_word))   #Checkpoint
+letters= split(asl_word)  #store the list
+print(letters)           #checkpoint
+
+def picture(letter):
+    img=cv2.imread(letter +'.png')
+    cv2.imshow('image', img)
+    cv2.waitKey(2000)
+    cv2.destroyAllWindows()
+    
+#    img = Image.open('C:\\Users\\djs72\\box\\ASL\\'+letter+'.png')
+#    img.show()
+
+for letter in letters:
+    picture(letter)
+
